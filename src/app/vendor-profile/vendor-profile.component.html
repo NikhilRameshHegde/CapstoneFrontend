@@ -1,0 +1,90 @@
+<div class="maincontainer">
+    <header id="home" class="header">
+      <div class="alert">
+        <div class="container">
+          <p class="alert-text">Manage Your Store Efficiently!</p>
+        </div>
+      </div>
+      <div class="header-top" data-header>
+        <div class="container">
+          <a [routerLink]="['/home']" class="navbar-link has-after">
+            <img src="/assets/images/logo.png" class="logoimg" alt="Glowing">
+          </a>
+        </div>
+      </div>
+    </header>
+  
+    <div class="vendor-page">
+      <!-- Sidebar with vendor actions -->
+      <aside class="categories-sidebar">
+        <h3>Vendor Actions</h3>
+        <ul>
+          <li><a (click)="viewProfile()" style="cursor: pointer;" class="dropdown-item">Your Profile</a></li>
+          <li><a (click)="signOut()" style="cursor: pointer;" class="dropdown-item">Logout</a></li>
+        </ul>
+      </aside>
+  
+      <main class="vendor-actions-main">
+        <h2>Vendor Dashboard</h2>
+  
+        <!-- Profile View/Update -->
+        <div *ngIf="currentAction === 'profile'" class="action-content">
+          <h3>Your Profile</h3>
+          <!-- Display vendor details -->
+          <div *ngIf="!isEditingProfile">
+            <p><strong>Name:</strong> {{ profileForm.get('name')?.value }}</p>
+            <p><strong>Description:</strong> {{ profileForm.get('description')?.value }}</p>
+            <p><strong>Contact Email:</strong> {{ profileForm.get('contactMail')?.value }}</p>
+            <p><strong>Contact Phone:</strong> {{ profileForm.get('contactPhone')?.value }}</p>
+            <p><strong>Website:</strong> {{ profileForm.get('website')?.value }}</p>
+            <p><strong>City:</strong> {{ profileForm.get('city')?.value }}</p>
+            <p><strong>GST No:</strong> {{ profileForm.get('gstno')?.value }}</p>
+            <button (click)="enableProfileEdit()" class="updatebtn">Update Profile</button>
+          </div>
+  
+          <!-- Edit vendor details form -->
+          <div *ngIf="isEditingProfile">
+            <form (ngSubmit)="onProfileSubmit()" [formGroup]="profileForm">
+              <div>
+                <label for="name">Name:</label>
+                <input id="name" formControlName="name" type="text" required>
+              </div>
+              <div>
+                <label for="description">Description:</label>
+                <textarea id="description" formControlName="description" required></textarea>
+              </div>
+              <div>
+                <label for="contactMail">Contact Email:</label>
+                <input id="contactMail" formControlName="contactMail" type="email" required>
+              </div>
+              <div>
+                <label for="contactPhone">Contact Phone:</label>
+                <input id="contactPhone" formControlName="contactPhone" type="text" required>
+              </div>
+              <div>
+                <label for="website">Website:</label>
+                <input id="website" formControlName="website" type="text" required>
+              </div>
+              <div>
+                <label for="city">City:</label>
+                <input id="city" formControlName="city" type="text" required>
+              </div>
+              <div>
+                <label for="gstno">GST No:</label>
+                <input id="gstno" formControlName="gstno" type="text" required>
+              </div>
+              <div>
+                <label for="password">New Password:</label>
+                <input id="password" formControlName="password" type="password">
+              </div>
+              <button type="submit" class="btn-primary">Save Changes</button>
+              <button type="button" (click)="cancelProfileEdit()" class="updatebtn">Cancel</button>
+            </form>
+          </div>
+        </div>
+  
+           
+      </main>
+    </div>
+  </div>
+  

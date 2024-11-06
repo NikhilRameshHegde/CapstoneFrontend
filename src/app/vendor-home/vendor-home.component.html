@@ -1,0 +1,342 @@
+
+
+  <!-- 
+    - #HEADER
+  -->
+<div id="top" class="maincontainer">
+  <header id="home" class="header">
+
+    <div class="alert">
+      <div class="container">
+        <p class="alert-text">Manage Your Store Efficiently!</p>
+      </div>
+    </div>
+
+    <div class="header-top" data-header>
+      <div class="container">
+
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+
+
+        <a [routerLink]="['/vendor-home']" class="logo">
+          <img src="/assets/images/logo.png" width="179" height="26" alt="Glowing">
+        </a>
+        
+        <div class="header-actions">
+     
+
+          <button class="header-action-btn" aria-label="user" routerLink="/vendor-profile">
+            <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <button class="header-action-btn" aria-label="user" (click)="signOut()">
+            <ion-icon name="log-out-outline"></ion-icon></button>
+
+        </div>
+
+        <nav class="navbar">
+          <ul class="navbar-list">
+            <li>
+              <a [routerLink]="['/vendor']" [queryParams]="{ action: 'create' }" class="navbar-link has-after">Create Product</a>
+            </li>
+            <li>
+              <a [routerLink]="['/vendor']" [queryParams]="{ action: 'products' }" class="navbar-link has-after">View/Update Products</a>
+            </li>
+            <li>
+              <a [routerLink]="['/vendor']" [queryParams]="{ action: 'delete' }" class="navbar-link has-after">Delete Product</a>
+            </li>
+            <li>
+              <a [routerLink]="['/vendor']" [queryParams]="{ action: 'reviews' }" class="navbar-link has-after">View Reviews</a>
+            </li>
+            <li>
+              <a [routerLink]="['/vendor-home']" fragment="contact" class="navbar-link has-after">Contact</a>
+            </li>
+          </ul>
+        </nav>
+        
+
+      </div>
+    </div>
+
+  </header>
+
+
+
+
+
+  <!-- 
+    - #MOBILE NAVBAR
+  -->
+
+  <div class="sidebar">
+    <div class="mobile-navbar" data-navbar>
+
+      <div class="wrapper">
+        <a href="#" class="logo">
+          <img style="background-image: url('./assets/images/logo.png')" width="179" height="26" alt="HometownHub">
+        </a>
+
+        <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+
+      <ul class="navbar-list">
+        <li>
+          <a href="#home"  class="navbar-link has-after">Home</a>
+        </li>
+        <li>
+          <a href="" class="navbar-link has-after">Categories</a>
+        </li>
+        <li>
+          <a href="#shop" class="navbar-link has-after">Shop</a>
+        </li>
+        <li>
+          <a href="#offer" class="navbar-link has-after">Offer</a>
+        </li>
+      </ul>
+      
+
+    </div>
+
+    <div class="overlay" data-nav-toggler data-overlay></div>
+  </div>
+
+
+
+
+
+  <main>
+    <article>
+
+      <!-- 
+        - #HERO
+      -->
+
+      <section class="section hero"  aria-label="hero" data-section>
+        <div class="container">
+
+          <ul class="has-scrollbar">
+
+            <li class="scrollbar-item">
+              <div class="hero-card has-bg-image" style="background-image: url('./assets/images/hero-banner-1.webp' )">
+
+                <div class="card-content1">
+
+                  <h1 class="h1 hero-title">
+                    Nearby Finds,<br>
+                     Delivered Fast
+
+                  </h1>
+
+                  <p class="hero-text">
+                    Stay on top of your business. View and manage all orders from your store with ease.
+                </p>
+                
+
+                  <!-- View Orders Button in Home Section -->
+<a  (click)="viewOrders()" class="btn btn-primary">View Orders</a>
+
+<!-- Modal for displaying order items -->
+<div *ngIf="showOrderModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" (click)="closeOrderModal()">&times;</span>
+    <h3>Order Items</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of orderItems">
+          <td>{{ item.productName }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | currency: 'INR' }}</td>
+          <td>{{ (item.quantity * item.price) | currency: 'INR' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Backdrop for the modal -->
+<div *ngIf="showOrderModal" class="modal-backdrop"></div>
+
+
+                </div>
+
+              </div>
+            </li>
+
+    
+          </ul>
+
+        </div>
+      </section>
+
+
+    </article>
+  </main>
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer id="contact" class="footer" data-section>
+    <div class="container">
+
+      <div class="footer-top">
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Company</p>
+          </li>
+
+         
+
+          <li>
+            <p class="footer-list-text bold">+91 9347682495</p>
+          </li>
+
+          <li>
+            <p class="footer-list-text">jeevanbabugotru-gmail.com</p>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Useful links</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">New Products</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Best Sellers</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Bundle & Save</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Online Gift Card</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Infomation</p>
+          </li>
+
+          
+
+          <li>
+            <a href="#" class="footer-link">Terms & Conditions</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Privacy Policy</a>
+          </li>
+
+        </ul>
+
+        <div class="footer-list">
+
+          <p class="newsletter-title">Good emails.</p>
+
+          <p class="newsletter-text">
+            Enter your email below to be the first to know about new collections and product launches.
+          </p>
+
+          <form action="" class="newsletter-form">
+            <input type="email" name="email_address" placeholder="Enter your email address" required
+              class="email-field">
+
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <div class="wrapper">
+          <p class="copyright">
+            &copy; 2022 HomeTownHub
+          </p>
+
+          <ul class="social-list">
+
+         
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+          
+
+          </ul>
+        </div>
+
+        <a [routerLink]="['/home']" fragment="home" class="navbar-link has-after">
+        <img src="./assets/images/logo.png" width="179" height="26" loading="lazy" alt="GlowingTest">
+        </a>
+
+        <img src="./assets/images/pay.png" width="313" height="28" alt="available all payment method" class="w-100">
+
+      </div>
+
+    </div>
+  </footer>
+
+
+
+
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+
+ <!-- Chatbot Toggle Icon -->
+<div class="chatbot-toggle" (click)="toggleChatbot()">
+  <ion-icon class="ion-icon-chat" name="chatbubbles-outline"></ion-icon>
+</div>
+
+<!-- Chatbot Container -->
+<div *ngIf="chatbotVisible" class="chatbot-container">
+  <iframe src="https://www.chatbase.co/chatbot-iframe/_Dog_x2P2-7DQxvAwz4nB" frameborder="0" class="chatbot-iframe"></iframe>
+</div>
+
+<!-- Back to Top Button -->
+<a [routerLink]="['/home']" fragment="home" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+  <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
+</a>
+
+
+<router-outlet></router-outlet>
+</div>

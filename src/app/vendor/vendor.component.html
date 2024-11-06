@@ -1,0 +1,189 @@
+<header class="header">
+  <div class="alert">
+    <div class="container">
+      <p class="alert-text">Free Shipping Across India on Orders Above ₹299!</p>
+    </div>
+  </div>
+
+  <div class="header-top" data-header>
+    <div class="container">
+      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+      <a href="#" class="logo">
+        <img class="logoimage" src="/assets/images/logo.png" width="179" height="26" alt="Glowing">
+      </a>
+
+      <div class="header-actions">
+        <button class="header-action-btn" aria-label="user" (click)="signOut()">
+          <ion-icon name="log-out-outline"></ion-icon></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="vendor-page">
+  <!-- Sidebar with vendor actions -->
+  <aside class="categories-sidebar">
+    <h3>Vendor Actions</h3>
+    <ul>
+      <li><a (click)="createProduct()" style="cursor: pointer;" class="dropdown-item">Create a New Product</a></li>
+      <li><a (click)="viewProducts()" style="cursor: pointer;" class="dropdown-item">View/Update Products</a></li>
+      <li><a (click)="deleteProduct()" style="cursor: pointer;" class="dropdown-item">Delete Product</a></li>
+      <li><a (click)="viewReviews()" class="dropdown-item">View Product Reviews</a></li>
+    </ul>
+  </aside>
+
+  <main class="vendor-actions-main">
+    <!-- Create Product Form -->
+    <div *ngIf="currentAction === 'create'" class="action-content">
+      <h3>Create a New Product</h3>
+      <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
+        <div>
+          <label for="name">Product Name:</label>
+          <input id="name" formControlName="name" type="text" required>
+        </div>
+
+        <div>
+          <label for="description">Description:</label>
+          <textarea id="description" formControlName="description" required></textarea>
+        </div>
+
+        <div>
+          <label for="price">Price:</label>
+          <input id="price" formControlName="price" type="number" required>
+        </div>
+
+        <div>
+          <label for="categoryId">Category:</label>
+          <select id="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)">
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="stockQuantity">Stock Quantity:</label>
+          <input id="stockQuantity" formControlName="stockQuantity" type="number" required>
+        </div>
+
+        <div>
+          <label for="imageUrl">Image URL:</label>
+          <input id="imageUrl" formControlName="imageUrl" type="text" required>
+        </div>
+
+        <button type="submit" class="btn-primary">Create Product</button>
+      </form>
+    </div>
+
+    
+      <!-- Products List -->
+      <div *ngIf="currentAction === 'products'" class="action-content">
+        <h3>Products</h3>
+        <div *ngFor="let product of products" class="product-card">
+          <img [src]="product.imageUrl" alt="{{product.name}}" class="product-image">
+          <p><strong>Name:</strong> {{ product.name }}</p>
+          <p><strong>Category:</strong> {{ getCategoryName(product.categoryId) }}</p>
+          <p><strong>Price:</strong> {{ product.price | currency:'INR' }}</p>
+          <p><strong>Stock Quantity:</strong> {{ product.stockQuantity }}</p>
+          <p><strong>Description:</strong> {{ product.description }}</p>
+  
+          <!-- Button to open the update form modal -->
+          <button (click)="toggleUpdateForm(product)" class="updatebtn">Update Product</button>
+        </div>
+      </div>
+  
+
+
+      
+      <!-- Update Product Modal -->
+      <div *ngIf="showUpdateModal && selectedProductForUpdate" class="modal action-content">
+        <div class="modal-content">
+          <span class="close-btn" (click)="closeModal()">&times;</span>
+          <h3>Update Product</h3>
+          <form (ngSubmit)="onUpdateProduct(selectedProductForUpdate.id)" [formGroup]="updateForms[selectedProductForUpdate.id]">
+            <div>
+              <label for="name">Name:</label>
+              <input id="name" formControlName="name" type="text" required>
+            </div>
+            <div>
+              <label for="description">Description:</label>
+              <textarea id="description" formControlName="description" required></textarea>
+            </div>
+            <div>
+              <label for="price">Price:</label>
+              <input id="price" formControlName="price" type="number" required>
+            </div>
+            <div>
+              <label for="categoryId">Category:</label>
+              <select id="categoryId" formControlName="categoryId">
+                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+              </select>
+            </div>
+            <div>
+              <label for="stockQuantity">Stock Quantity:</label>
+              <input id="stockQuantity" formControlName="stockQuantity" type="number" required>
+            </div>
+            <div>
+              <label for="imageUrl">Image URL:</label>
+              <input id="imageUrl" formControlName="imageUrl" type="text" required>
+            </div>
+            <button type="submit" class="btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+  
+      <!-- Backdrop for the modal -->
+      <div *ngIf="showUpdateModal" class="modal-backdrop"></div>
+
+       
+ 
+
+    <!-- Delete Product Section -->
+    <div *ngIf="currentAction === 'delete'" class="action-content">
+      <h3>Delete Products</h3>
+      <div *ngFor="let product of products" class="product-card">
+        <img [src]="product.imageUrl" alt="{{product.name}}" class="product-image">
+        <p><strong>Name:</strong> {{ product.name }}</p>
+        <p><strong>Category:</strong> {{ getCategoryName(product.categoryId) }}</p>
+        <p><strong>Price:</strong> {{ product.price | currency:'INR' }}</p>
+        <p><strong>Stock Quantity:</strong> {{ product.stockQuantity }}</p>
+        <p><strong>Description:</strong> {{ product.description }}</p>
+
+        <button type="submit" (click)="deleteProductbyId(product.id)" class="updatebtn">Delete Product</button>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div *ngIf="currentAction === 'reviews'" class="action-content">
+      <h3>Product Reviews</h3>
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products" (click)="fetchReviews(product.id)">
+            <td>{{ product.name }}</td>
+            <td>{{ product.price | currency:'INR' }}</td>
+            <td>{{ product.stockQuantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="selectedProductReviews.length > 0" class="reviews-section">
+        <h4>Reviews for {{ selectedProductName }}</h4>
+        <ul>
+          <li *ngFor="let review of selectedProductReviews; let i = index">
+            <p><strong>{{ i + 1 }}. Rating:</strong> {{ review.rating }}</p>
+            <p><strong>Comment:</strong> {{ review.comment }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>

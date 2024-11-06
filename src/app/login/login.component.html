@@ -1,0 +1,84 @@
+<div class="main-container">
+  
+  <div class="container">
+    <h2>Login</h2>
+    <form (ngSubmit)="onLogin()">
+      <!-- Role Selection (Styled Dropdown) -->
+      <div class="form-group">
+        <label for="roleSelection">Role</label>
+        <select
+          class="form-control custom-dropdown"
+          name="role"
+          required
+          [(ngModel)]="role"
+          #roleSelect="ngModel"
+        >
+          <option value="" disabled>Select your role</option>
+          <option value="Vendor">Vendor</option>
+          <option value="User">User</option>
+        </select>
+        <div *ngIf="roleSelect.invalid && roleSelect.touched" class="alert alert-danger">
+          Role is required!
+        </div>
+      </div>
+
+      <!-- Email Field (for both User and Vendor) -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Enter email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          id="exampleInputPassword2"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          autocomplete="off"
+          class="form-control"
+        />
+      </div>
+
+      <!-- Forgot Password Link -->
+      <div class="text-right forgot-password">
+        <a href="/forgot-password" class="link">Forgot Password?</a>
+      </div>
+
+      <div class="btn-container">
+        <button type="submit" class="buttonng">Login</button>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="loginFailed" class="alert alert-danger mt-2">
+        Login failed. Please check your email and password.
+      </div>
+    </form>
+
+    <!-- OR Separator -->
+    <div class="text-center mt-3 mb-3 or-separator">
+      <p>or</p>
+    </div>
+
+    <!-- Google Login Button -->
+    <div class="buttong">
+      <button id="googleBtn">Login with Google</button>
+    </div>
+
+    <!-- Link to Sign Up Page -->
+    <div class="text-center mt-3">
+      <p>Don't have an account? <a href="/signup" class="link">Sign Up</a></p>
+    </div>
+  </div>
+</div>

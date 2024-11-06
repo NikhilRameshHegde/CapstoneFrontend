@@ -1,0 +1,88 @@
+<header class="header">
+  <div class="alert">
+    <div class="container">
+      <p class="alert-text">Free Shipping Across India on Orders Above ₹299!</p>
+    </div>
+  </div>
+
+  <div class="header-top" data-header>
+    <div class="container">
+      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+
+      <div class="input-wrapper">
+        <input 
+          type="search" 
+          name="search" 
+          placeholder="Search product" 
+          class="search-field" 
+          [(ngModel)]="searchQuery" 
+          (input)="onSearch()"
+        >
+        <button class="search-submit" aria-label="search" (click)="onSearch()">
+          <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+      
+      <a href="/home" class="logo">
+        <img class="logoimage" src="/assets/images/logo.png" width="179" height="26" alt="Glowing">
+      </a>
+
+      <div class="header-actions">
+        <button class="header-action-btn" aria-label="user" routerLink="/profile">
+          <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+        </button>
+        
+        <button class="header-action-btn" aria-label="cart item">
+          <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="product-list-page">
+  <aside class="sidebar categories-sidebar">
+    <h3 class="sidebar-title">Categories</h3>
+    <ul class="sidebar-list">
+      <li *ngFor="let category of categories" class="sidebar-item">
+        <a [routerLink]="['/products', category.id]" class="sidebar-link">{{ category.name }}</a>
+      </li>
+    </ul>
+  </aside>
+
+  <main class="main-content products-main">
+    <h2 class="main-title">Products</h2>
+
+    <!-- Price Filter Section -->
+    <div class="filter-section price-filter">
+      <label for="priceRange" class="filter-label">Filter by Price Range:</label>
+      <select id="priceRange" (change)="onPriceRangeChange($event)" class="filter-select">
+        <option value="">All</option>
+        <option value="100-200">₹100 - ₹200</option>
+        <option value="300-400">₹300 - ₹400</option>
+        <option value="500-600">₹500 - ₹600</option>
+        <!-- Add more price ranges as needed -->
+      </select>
+    </div>
+
+    <!-- Products Section -->
+    <div *ngIf="filteredProducts.length; else noProducts" class="products-grid">
+      <div *ngFor="let product of filteredProducts" class="product-card" [routerLink]="['/productsdetails', product.id]">
+        <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image">
+        <div class="product-details">
+          <h3 class="product-title">{{ product.name }}</h3>
+          <p class="product-description">{{ product.description }}</p>
+          <p class="product-price">{{ product.price | currency:'INR' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noProducts>
+      <p class="no-products-message">No products found for this category.</p>
+    </ng-template>
+  </main>
+</div>

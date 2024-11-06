@@ -1,0 +1,297 @@
+<div class="main-container">
+  <div class="container">
+    <h2>Sign Up</h2>
+    <form (ngSubmit)="onSignup(signupForm)" #signupForm="ngForm">
+      <!-- Role Selection (Styled Dropdown) -->
+      <div class="form-group">
+        <label for="roleSelection">Role</label>
+        <select
+          class="form-control custom-dropdown"
+          name="role"
+          required
+          [(ngModel)]="role"
+          (change)="onRoleChange()"
+          #roleSelect="ngModel"
+        >
+          <option value="" disabled>Select your role</option>
+          <option value="Vendor">Vendor</option>
+          <option value="User">User</option>
+        </select>
+        <div *ngIf="roleSelect.invalid && roleSelect.touched" class="alert alert-danger">
+          Role is required!
+        </div>
+      </div>
+
+      <!-- Fields for User -->
+      <div *ngIf="role === 'User'">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            name="username"
+            required
+            minlength="4"
+            pattern="^[a-zA-Z_]+$"
+            [(ngModel)]="formData.username"
+            #username="ngModel"
+          />
+          <div *ngIf="username.invalid && username.touched" class="alert alert-danger">
+            <div *ngIf="username.errors?.['required']">Username is required!</div>
+            <div *ngIf="username.errors?.['minlength']">Username must be at least 4 characters long!</div>
+            <div *ngIf="username.errors?.['pattern']">Username can only contain letters and underscores!</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="userPassword">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            name="userPassword"
+            required
+            minlength="8"
+            [(ngModel)]="formData.password"
+            #userPassword="ngModel"
+          />
+          <div *ngIf="userPassword.invalid && userPassword.touched" class="alert alert-danger">
+            <div *ngIf="userPassword.errors?.['required']">Password is required!</div>
+            <div *ngIf="userPassword.errors?.['minlength']">Password must be at least 8 characters long!</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Confirm your password"
+            name="confirmPassword"
+            required
+            [(ngModel)]="confirmPassword"
+            #confirmPasswordInput="ngModel"
+          />
+          <div *ngIf="passwordMismatch" class="alert alert-danger">
+            Passwords do not match!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Enter email"
+            name="email"
+            required
+            [(ngModel)]="formData.email"
+            #email="ngModel"
+          />
+          <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+            <div *ngIf="email.errors?.['required']">Email is required!</div>
+            <div *ngIf="email.errors?.['email']">Please enter a valid email address!</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter phone"
+            name="phone"
+            required
+            [(ngModel)]="formData.phone"
+            #phone="ngModel"
+          />
+          <div *ngIf="phone.invalid && phone.touched" class="alert alert-danger">
+            Phone is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter address"
+            name="address"
+            required
+            [(ngModel)]="formData.address"
+            #address="ngModel"
+          />
+          <div *ngIf="address.invalid && address.touched" class="alert alert-danger">
+            Address is required!
+          </div>
+        </div>
+      </div>
+
+      <!-- Fields for Vendor -->
+      <div *ngIf="role === 'Vendor'">
+        <div class="form-group">
+          <label for="vendorName">Vendor Name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Vendor name"
+            name="vendorName"
+            required
+            [(ngModel)]="vendorData.name"
+            #vendorName="ngModel"
+          />
+          <div *ngIf="vendorName.invalid && vendorName.touched" class="alert alert-danger">
+            Vendor name is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="vendorPassword">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            name="vendorPassword"
+            required
+            minlength="8"
+            [(ngModel)]="vendorData.password"
+            #vendorPassword="ngModel"
+          />
+          <div *ngIf="vendorPassword.invalid && vendorPassword.touched" class="alert alert-danger">
+            <div *ngIf="vendorPassword.errors?.['required']">Password is required!</div>
+            <div *ngIf="vendorPassword.errors?.['minlength']">Password must be at least 8 characters long!</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmVendorPassword">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Confirm your password"
+            name="confirmVendorPassword"
+            required
+            [(ngModel)]="confirmPassword"
+            #confirmVendorPasswordInput="ngModel"
+          />
+          <div *ngIf="passwordMismatch" class="alert alert-danger">
+            Passwords do not match!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contactMail">Contact Email</label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Enter contact email"
+            name="contactMail"
+            required
+            [(ngModel)]="vendorData.contactMail"
+            #contactMail="ngModel"
+          />
+          <div *ngIf="contactMail.invalid && contactMail.touched" class="alert alert-danger">
+            <div *ngIf="contactMail.errors?.['required']">Contact email is required!</div>
+            <div *ngIf="contactMail.errors?.['email']">Please enter a valid contact email!</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contactPhone">Contact Phone</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter contact phone"
+            name="contactPhone"
+            required
+            [(ngModel)]="vendorData.contactPhone"
+            #vendorPhone="ngModel"
+          />
+          <div *ngIf="vendorPhone.invalid && vendorPhone.touched" class="alert alert-danger">
+            Contact phone is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            class="form-control"
+            placeholder="Enter vendor description"
+            name="description"
+            required
+            [(ngModel)]="vendorData.description"
+            #description="ngModel"
+          ></textarea>
+          <div *ngIf="description.invalid && description.touched" class="alert alert-danger">
+            Description is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="website">Website</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter website"
+            name="website"
+            required
+            [(ngModel)]="vendorData.website"
+            #website="ngModel"
+          />
+          <div *ngIf="website.invalid && website.touched" class="alert alert-danger">
+            Website is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your city"
+            name="city"
+            required
+            [(ngModel)]="vendorData.city"
+            #city="ngModel"
+          />
+          <div *ngIf="city.invalid && city.touched" class="alert alert-danger">
+            City is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="gstno">GST Number</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter GST Number"
+            name="gstno"
+            required
+            [(ngModel)]="vendorData.gstno"
+            #gstno="ngModel"
+          />
+          <div *ngIf="gstno.invalid && gstno.touched" class="alert alert-danger">
+            GST number is required!
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="btn-container">
+        <button type="submit" [disabled]="isCheckingEmail" class="buttonng">Signup</button>
+      </div>
+      <div *ngIf="emailAlreadyRegistered" class="alert alert-danger">
+        <p>Email is already registered. Please use a different email or login.</p>
+      </div>
+      
+      <!-- Disable the button when checking for existing email -->
+      
+    </form>
+
+    <!-- Link to Sign In Page -->
+    <div class="text-center mt-3">
+      <p>Already have an account? <a href="/login" class="link">Sign In</a></p>
+    </div>
+  </div>
+</div>

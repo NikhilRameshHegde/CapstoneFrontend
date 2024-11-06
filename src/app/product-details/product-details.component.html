@@ -1,0 +1,92 @@
+<header class="header">
+    <div class="alert">
+      <div class="container">
+        <p class="alert-text">Free Shipping Across India on Orders Above ₹299!</p>
+      </div>
+    </div>
+    <div class="header-top" data-header>
+      <div class="container">
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+  
+        <div class="input-wrapper">
+          <input type="search" name="search" placeholder="Search product" class="search-field">
+          <button class="search-submit" aria-label="search">
+            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+          </button>
+        </div>
+  
+        <a href="/home" class="logo">
+          <img class="logoimage" src="/assets/images/logo.png" width="179" height="26" alt="Glowing">
+        </a>
+  
+        <div class="header-actions">
+          <button class="header-action-btn" aria-label="user" routerLink="/profile">
+            <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+          </button>
+         
+          <button class="header-action-btn" aria-label="cart item" routerLink="/order-item">
+            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+          </button>
+          <button class="header-action-btn" aria-label="user" (click)="signOut()">
+            <ion-icon name="log-out-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+</header>
+
+<div class="product-details-page" style="font-size: 16px; color: #666;">
+    <div class="order-card">
+        <h1>{{ product?.name }}</h1>
+        <div class="order-items">
+            <div class="order-item">
+            <img [src]="product?.imageUrl" alt="{{ product?.name }}">
+            <div class="item-details">
+            <p>{{ product?.description }}</p>
+            <p class="product-price">{{ product?.price | currency:'INR' }}</p>
+            <button (click)="addToCart()" class="updatebtn">Add to Cart</button>
+            <p *ngIf="isLowStock()" class="stock-info low-stock">
+                Only {{ product?.stockQuantity }} left in stock!
+            </p>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+    
+<div class="product-reviews">
+    <h2>Reviews</h2>
+    <div *ngIf="reviews.length; else noReviews">
+        <div *ngFor="let review of reviews" class="review-item">
+            <p><strong>{{ review.username }}</strong> ({{ review.reviewDate | date:'medium' }})</p>
+            <p>{{ review.comment }}</p>
+            <p>Rating: {{ review.rating }}</p>
+        </div>
+    </div>
+    <ng-template #noReviews>
+        <p>No reviews yet.</p>
+    </ng-template>
+
+    <form (ngSubmit)="submitReview()" class="action-content review-form">
+        <div class="form-row">
+            <label for="username" class="form-label">Username:</label>
+            <input id="username" type="text" [(ngModel)]="newReview.username" name="username" required class="input-field" readonly>
+        </div>
+        <div class="form-row">
+            <label for="comment" class="form-label">Review:</label>
+            <textarea id="comment" [(ngModel)]="newReview.comment" name="comment" placeholder="Write a review" required class="textarea-field"></textarea>
+        </div>
+        <div class="form-row">
+            <label for="rating" class="form-label">Rating:</label>
+            <input id="rating" type="number" [(ngModel)]="newReview.rating" name="rating" min="1" max="5" required class="input-field">
+        </div>
+        <button type="submit" class="updatebtn">Submit Review</button>
+    </form>
+    
+</div>

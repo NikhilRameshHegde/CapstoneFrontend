@@ -1,0 +1,98 @@
+<div class="maincontainer">
+  <header id="home" class="header">
+    <div class="alert">
+      <div class="container">
+        <p class="alert-text">Free Shipping Across India on Orders Above ₹299!</p>
+      </div>
+    </div>
+    <div class="header-top" data-header>
+      <div class="container">
+        <a [routerLink]="['/home']" class="navbar-link has-after">
+          <img src="/assets/images/logo.png" class="logoimg" alt="Glowing">
+        </a>
+      </div>
+    </div>
+  </header>
+  <div class="vendor-page">
+    <!-- Sidebar with user actions -->
+    <aside class="categories-sidebar">
+      <h3>User Actions</h3>
+      <ul>
+        <li><a (click)="viewProfile()" style="cursor: pointer;" class="dropdown-item">Your Profile</a></li>
+        <li><a (click)="viewOrders()" style="cursor: pointer;" class="dropdown-item">Your Orders</a></li>
+        <li><a (click)="signOut()" style="cursor: pointer;" class="dropdown-item">Logout</a></li>
+      </ul>
+    </aside>
+  
+    <main class="vendor-actions-main">
+      <h2>User Dashboard</h2>
+  
+      <!-- Profile View/Update -->
+      <div *ngIf="currentAction === 'profile'" class="action-content">
+        <h3>Your Profile</h3>
+        <!-- Display user details -->
+        <div *ngIf="!isEditingProfile">
+          <p><strong>Username:</strong> {{ profileForm.get('username')?.value }}</p>
+          <p><strong>Email:</strong> {{ profileForm.get('email')?.value }}</p>
+          <p><strong>Phone No:</strong> {{ profileForm.get('phone')?.value }}</p>
+          <p><strong>Address:</strong> {{ profileForm.get('address')?.value }}</p>
+          <button (click)="enableProfileEdit()" class="updatebtn">Update Profile</button>
+        </div>
+  
+        <!-- Edit user details form -->
+        <div *ngIf="isEditingProfile">
+          <form (ngSubmit)="onProfileSubmit()" [formGroup]="profileForm">
+            <div>
+              <label for="username">Username:</label>
+              <input id="username" formControlName="username" type="text" required>
+            </div>
+            <div>
+              <label for="email">Email:</label>
+              <input id="email" formControlName="email" type="email" required>
+            </div>
+            <div>
+              <label for="phone">Phone No:</label>
+              <input id="phone" formControlName="phone" type="text" required>
+            </div>
+            <div>
+              <label for="address">Address:</label>
+              <textarea id="address" formControlName="address" required></textarea>
+            </div>
+            <div>
+              <label for="password">New Password:</label>
+              <input id="password" formControlName="password" type="password">
+            </div>
+            <button type="submit" class="btn-primary">Save Changes</button>
+            <button type="button" (click)="cancelProfileEdit()" class="updatebtn">Cancel</button>
+          </form>
+        </div>
+      </div>
+  
+      <!-- Orders View -->
+      <div *ngIf="currentAction === 'orders'" class="action-content">
+        <h3>Your Orders</h3>
+        <div class="order-cards">
+          <div *ngFor="let order of orders" class="order-card">
+            <div class="order-header">
+              <h4>Order ID: {{ order.id }}</h4>
+              <p>Order Date: {{ order.orderDate | date:'medium' }}</p>
+            </div>
+            <div class="order-items">
+              <div *ngFor="let item of order.orderItems; let i = index" class="order-item">
+                <img [src]="item.productImage" alt="{{ item.productName }}" class="product-image">
+                <div class="item-details">
+                  <p><strong>{{ item.productName }}</strong></p>
+                  <p>Quantity: {{ item.quantity }}</p>
+                  <p>Price: {{ item.price | currency:'INR' }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="order-total">
+              <p><strong>Total: {{ order.total | currency:'INR' }}</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  

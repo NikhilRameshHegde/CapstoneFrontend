@@ -1,0 +1,56 @@
+<div class="maincontainer">
+    <header id="home" class="header">
+      <div class="alert">
+        <div class="container">
+          <p class="alert-text">Free Shipping Across India on Orders Above ₹299!</p>
+        </div>
+      </div>
+      <div class="header-top" data-header>
+        <div class="container">
+          <a [routerLink]="['/home']" class="navbar-link has-after">
+            <img src="/assets/images/logo.png" class="logoimg" alt="Glowing">
+          </a>
+        </div>
+      </div>
+    </header>
+  
+    <div class="vendor-page">
+      <main class="vendor-actions-main">
+        <h2>Order Details</h2>
+        
+        <div class="order-cards">
+          <!-- Loop over order items -->
+          <div *ngFor="let item of orderItems; let i = index" class="order-card">
+            <div class="order-items">
+              <div class="order-item">
+                <p><strong>Item {{ i + 1 }}:</strong></p> <!-- Display item number -->
+                
+                <img [src]="item.productImage" alt="{{ item.productName }}" class="product-image">
+
+                <div class="item-details">
+                  <p><strong>{{ item.productName }}</strong></p>
+                  <p>Price: {{ item.price | currency:'INR' }}</p>
+                  <p>
+                    Quantity: 
+                    <button (click)="decreaseQuantity(i)" class="updatebtn">-</button>
+                    <button class="updatebtn">{{ item.quantity }}</button>
+
+                    <button (click)="increaseQuantity(i)" class="updatebtn">+</button>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Total Amount Card -->
+          <div class="order-card">
+            <div class="order-total">
+              <p><strong>Total Amount: {{ totalAmount | currency:'INR' }}</strong></p>
+            </div>
+            <button (click)="placeOrder()" class="btn-primary">Place Order</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
