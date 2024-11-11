@@ -41,7 +41,6 @@
 /* home.component.css */
 .maincontainer{
   font-size: 10px !important;
-
 }
 
   
@@ -1262,7 +1261,7 @@ input, button {
   }
 
 .card-content1 {
-  color: white
+  color: white;
 }
 .table-orders{
  color: black;

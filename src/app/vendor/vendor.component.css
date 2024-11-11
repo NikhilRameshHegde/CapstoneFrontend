@@ -41,7 +41,7 @@
 }
 
 .product-card {
-  background-color: var(--white);
+  background-color: pink;
   border: 1px solid var(--light-gray);
   border-radius: var(--radius-3);
   padding: 20px;
