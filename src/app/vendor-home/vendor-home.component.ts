@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, Inject, PLATFORM_ID, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -43,9 +43,16 @@ export class VendorHomeComponent implements OnInit {
   selectedPriceRange: any;
   searchQuery: any;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,private productService: ProductService,private categoryService: CategoryService,private router: Router,private userService:UserService ,private route:ActivatedRoute,private vendorService:VendorService,private orderItemService:OrderItemService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private productService: ProductService,private categoryService: CategoryService,private router: Router,private userService:UserService ,private route:ActivatedRoute,private vendorService:VendorService,private orderItemService:OrderItemService, private viewportScroller: ViewportScroller) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
+
+  scrollToTop(): void {
+    if (this.isBrowser) {
+      this.viewportScroller.scrollToPosition([0, 0]);
+    }
+  }
+
   chatbotVisible: boolean = false;
 
   toggleChatbot(): void {

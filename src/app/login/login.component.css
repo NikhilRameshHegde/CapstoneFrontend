@@ -1,224 +1,183 @@
-/* General Styles */
-/* home.component.css */
-:host {
-    font-size: 15px; /* Component-specific font size */
-  }
-.form-control {
-    font-size: 15px; /* Component-specific font size */
-    
-
-
+/* General container styling */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Allow scrolling if needed */
+    background-color: #141414; /* Dark background */
+    color: #ffffff; /* White text for contrast */
+    padding: 20px;
   }
   
-/* Main Container */
-.main-container {
-    height: 200vh;
-    align-items: baseline;
-
-    display: flex;
-    justify-content: first baseline;
-    padding: 20px;
-}
-
-/* Form Container */
-.container {
-    max-width: 450px;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.15);
-}
-
-/* Heading */
-h2 {
+  .login-container {
+    width: 400px;
+    padding: 40px 30px;
+    background: #222222; /* Netflix dark panel color */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 6px; /* Slightly rounded for a modern look */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    max-height: 100%; /* Prevents overflow */
+    overflow-y: auto; /* Adds scroll to login-container if the content is too long */
+  }
+  
+  .login-title {
+    font-size: 28px;
+    color: #ffffff;
     text-align: center;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+  
+  /* Form styling */
+  .login-form .form-group {
     margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-}
+    
+  }
 
-/* Form Group */
-.form-group {
-    width: 100%;
-    margin-bottom: 3px;
-}
+  /* Placeholder color for the email input */
+#email::placeholder {
+    color: rgba(225, 80, 80, 0.7)  /* Light gray color for the placeholder text */
+  }
+  
+#password::placeholder {
+    color: rgba(225, 80, 80, 0.7)  /* Light gray color for the placeholder text */
 
-/* Label */
-label {
+}  
+
+  .login-form label {
+    font-size: 13px;
+    color: #b3b3b3; /* Light gray for labels */
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
-
-/* Input Fields */
-input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    margin-bottom: 3px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-input:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
-}
-
-/* Error Message Styling */
-.alert {
-    padding: 10px;
-    border-radius: 8px;
-    text-align: left;
-    margin-top: 10px;
-    font-size: 15px;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-/* Button Container */
-.btn-container {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-/* Button */
-.buttonng {
+    margin-bottom: 8px;
+  }
+  
+  /* Custom dropdown styling */
+  .custom-dropdown {
+    appearance: none;
     width: 100%;
     padding: 12px;
-    margin-top: 17px;
-
-    background-color: var(--pale-spring-bud);
-    border: none;
-    border-radius: 8px;
-    color: black;
-    font-size: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.logo { margin-inline-end: 60px;
-    size: 4px;
-width: fit-content; }
-
-.buttonng:hover {
-    background-color: rgb(205, 206, 135);
-}
-
-/* Forgot Password Link */
-.forgot-password {
-    text-align: right;
-
-    margin-bottom: 15px;
-}
-
-.forgot-password .link {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.forgot-password .link:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-
-/* OR Separator */
-.or-separator p {
-    font-size: 15px;
-    color: #666;
-}
-
-/* Styling for the button container */
-.buttong {
-    display: flex;
-    justify-content: center;  /* Center the button horizontally */
-    align-items: center;      /* Center the button vertically if the container has height */
-    margin-top: 20px;         /* Add some space above the button if needed */
-    border: none;             /* Remove any border from the container */
-    background: none;         /* Remove any background from the container */
-}
-
-/* Styling for the button itself */
-.buttong button {
-    padding: 12px;   
-    border: none;    
-    background: none;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .custom-dropdown:focus {
+    outline: none;
+    border-color: #e50914; /* Netflix red for focus */
+    box-shadow: 0 0 4px rgba(229, 9, 20, 0.5);
+  }
+  
+  /* Input field styling */
+  .form-control {
     width: 100%;
-  border: none;
-  display: block;          /* Remove default border */
-    border-radius: 8px;        /* Add border radius for rounded corners */
-    color: white;              /* Set text color */
-    font-size: 15px;           /* Set font size */
-    cursor: pointer;           /* Change cursor to pointer on hover */
-    transition: background-color 0.3s ease; /* Add transition for background color change */
-}
-
-
-
-.link {
-    color: #007bff;
+    padding: 12px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #333333;
+    font-size: 14px;
+    color: #ffffff;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #e50914;
+    box-shadow: 0 0 4px rgba(229, 9, 20, 0.5);
+  }
+  
+  /* Forgot password link styling */
+  .forgot-password .link {
+    font-size: 14px;
+    color: rgb(34, 113, 140);
     text-decoration: none;
     transition: color 0.3s ease;
-}
+  }
+  
+  .forgot-password .link:hover {
+    color: #ffffff;
+  }
+  
+  /* Login button styling */
+  .buttonng {
+    width: 100%;
+    padding: 12px;
+    background: #e50914; /* Netflix red */
+    color: #ffffff;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .buttonng:hover {
+    background: #f40612; /* Slightly lighter red for hover */
+  }
+  
+  .btn-container {
+    margin-top: 20px;
+  }
+  
+  /* Error message styling */
+  .alert.alert-danger {
+    color: #e87c03; /* Netflix orange for warnings */
+    font-size: 14px;
+    padding: 10px 12px;
+    background-color: #333333;
+    border: 1px solid #e87c03;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  /* OR separator styling */
+  .or-separator {
+    text-align: center;
+    margin: 24px 0;
+    font-size: 14px;
+    color: #b3b3b3;
+    display: flex;
+    align-items: center;
+  }
+  
+  .or-separator span {
+    background-color: #222222;
+    padding: 0 10px;
+  }
+  
+  .or-separator::before,
+  .or-separator::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background-color: #444444;
+  }
+  
+  /* Sign up link styling */
+  .signup-link {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  
+  .signup-link .link {
+    color: rgb(20, 250, 20);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .signup-link .link:hover {
+    color: #e50914; /* Highlight with red on hover */
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    background-color: #141414; /* Dark background */
+  }
 
-.link:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        max-width: 90%;
-        padding: 20px;
-    }
-
-    h2 {
-        font-size: 15px;
-    }
-
-    input {
-        padding: 8px;
-        font-size: 15px;
-    }
-
-    button {
-        padding: 10px;
-        font-size: 15px;
-    }
-}
-
-/* Two-Column Layout */
-@media (min-width: 769px) {
-    .form-group {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .form-group label,
-    .form-group input {
-        width: 100%;
-    }
-
-    .form-group .full-width {
-        width: 100%;
-    }
-
-    /* Error messages should take full width */
-    .alert {
-        width: 100%;
-    }
-}

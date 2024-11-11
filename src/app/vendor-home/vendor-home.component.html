@@ -8,7 +8,7 @@
 
     <div class="alert">
       <div class="container">
-        <p class="alert-text">Manage Your Store Efficiently!</p>
+        <p class="alert-text">Take control of your store like never before!</p>
       </div>
     </div>
 
@@ -145,9 +145,9 @@
 <div *ngIf="showOrderModal" class="modal">
   <div class="modal-content">
     <span class="close-btn" (click)="closeOrderModal()">&times;</span>
-    <h3>Order Items</h3>
+    <h3 class="odr">Order Items</h3>
 
-    <table>
+    <table class="table-orders">
       <thead>
         <tr>
           <th>Product Name</th>
@@ -206,11 +206,19 @@
          
 
           <li>
-            <p class="footer-list-text bold">+91 9347682495</p>
+            <p class="footer-list-text bold">+91 9353817057</p>
           </li>
 
           <li>
-            <p class="footer-list-text">jeevanbabugotru-gmail.com</p>
+            <p class="footer-list-text">nikhil36908&#64;gmail.com</p>
+          </li>
+
+          <li>
+            <p class="footer-list-text bold">+91 7396393972</p>
+          </li>
+
+          <li>
+            <p class="footer-list-text">pavani336&#64;gmail.com</p>
           </li>
 
         </ul>
@@ -242,7 +250,7 @@
         <ul class="footer-list">
 
           <li>
-            <p class="footer-list-title">Infomation</p>
+            <p class="footer-list-title">Information</p>
           </li>
 
           
@@ -280,20 +288,20 @@
 
         <div class="wrapper">
           <p class="copyright">
-            &copy; 2022 HomeTownHub
+            &copy; 2024 UrbanBloom
           </p>
 
           <ul class="social-list">
 
          
             <li>
-              <a href="#" class="social-link">
+              <a href="https://www.facebook.com/profile.php?id=100082222343744" class="social-link" target="_blank">
                 <ion-icon name="logo-facebook"></ion-icon>
               </a>
             </li>
 
             <li>
-              <a href="#" class="social-link">
+              <a href="https://www.Instagram.com/bokampavani" class="social-link" target="_blank">
                 <ion-icon name="logo-instagram"></ion-icon>
               </a>
             </li>
@@ -303,7 +311,7 @@
           </ul>
         </div>
 
-        <a [routerLink]="['/home']" fragment="home" class="navbar-link has-after">
+        <a [routerLink]="['/vendor-home']" fragment="home" class="navbar-link has-after">
         <img src="./assets/images/logo.png" width="179" height="26" loading="lazy" alt="GlowingTest">
         </a>
 
@@ -333,9 +341,11 @@
 </div>
 
 <!-- Back to Top Button -->
-<a [routerLink]="['/home']" fragment="home" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+<!-- Back to Top Button -->
+<a (click)="scrollToTop()" class="back-top-btn" aria-label="back to top" data-back-top-btn>
   <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
 </a>
+
 
 
 <router-outlet></router-outlet>

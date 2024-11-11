@@ -1,8 +1,8 @@
 <div class="main-container">
-  
-  <div class="container">
-    <h2>Login</h2>
-    <form (ngSubmit)="onLogin()">
+  <div class="login-container">
+    <h2 class="login-title">Login</h2>
+    <form (ngSubmit)="onLogin()" class="login-form">
+      
       <!-- Role Selection (Styled Dropdown) -->
       <div class="form-group">
         <label for="roleSelection">Role</label>
@@ -38,10 +38,10 @@
 
       <!-- Password Field -->
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
+        <label for="password">Password</label>
         <input
           type="password"
-          id="exampleInputPassword2"
+          id="password"
           placeholder="Password"
           [(ngModel)]="password"
           name="password"
@@ -52,10 +52,11 @@
       </div>
 
       <!-- Forgot Password Link -->
-      <div class="text-right forgot-password">
+      <div class="forgot-password">
         <a href="/forgot-password" class="link">Forgot Password?</a>
       </div>
 
+      <!-- Login Button -->
       <div class="btn-container">
         <button type="submit" class="buttonng">Login</button>
       </div>
@@ -67,17 +68,12 @@
     </form>
 
     <!-- OR Separator -->
-    <div class="text-center mt-3 mb-3 or-separator">
-      <p>or</p>
-    </div>
-
-    <!-- Google Login Button -->
-    <div class="buttong">
-      <button id="googleBtn">Login with Google</button>
+    <div class="or-separator">
+      <span>or</span>
     </div>
 
     <!-- Link to Sign Up Page -->
-    <div class="text-center mt-3">
+    <div class="signup-link">
       <p>Don't have an account? <a href="/signup" class="link">Sign Up</a></p>
     </div>
   </div>
