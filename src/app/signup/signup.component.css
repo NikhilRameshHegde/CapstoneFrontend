@@ -1,221 +1,151 @@
-/* General Styles */
-/* home.component.css */
-:host {
-  font-size: 15px; /* Component-specific font size */
-}
-.form-control {
-  font-size: 15px; /* Component-specific font size */
-  
-
-
+/* General Body Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
 /* Main Container */
 .main-container {
-  height: 200vh;
-  align-items: baseline;
-
-  display: flex;
-  justify-content: first baseline;
-  padding: 20px;
-}
-
-/* Form Container */
-.container {
-  max-width: 450px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
   width: 100%;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 800px;  /* Increase the max-width for a larger form */
+  box-sizing: border-box;  /* To ensure padding is included in the width */
+  margin: 0 auto;
+  text-align: center;  /* Center the content within the container */
 }
 
-.container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.15);
-}
-
-/* Heading */
+/* Form Title */
 h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 2.5rem;  /* Increase font size */
+  margin-bottom: 30px;
   color: #333;
 }
 
 /* Form Group */
 .form-group {
-  width: 100%;
-  margin-bottom: 3px;
+  margin-bottom: 20px;
 }
 
-/* Label */
+/* Labels */
 label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
+  font-size: 1.1rem;  /* Slightly larger text for labels */
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
 }
 
-/* Input Fields */
-input {
+/* Inputs, Selects, Textareas */
+input,
+select,
+textarea {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-  margin-bottom: 3px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 15px;  /* Increase padding to make inputs larger */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1.1rem;  /* Increase font size of input text */
+  transition: border-color 0.3s ease;
 }
 
-input:focus {
+/* On Focus Input Styling */
+input:focus,
+select:focus,
+textarea:focus {
   border-color: #007bff;
   outline: none;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
 }
 
-/* Error Message Styling */
-.alert {
-  padding: 10px;
-  border-radius: 8px;
-  text-align: left;
-  margin-top: 10px;
-  font-size: 15px;
-}
-
-.alert-danger {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-/* Button Container */
-.btn-container {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-/* Button */
+/* Button Styling */
 .buttonng {
   width: 100%;
-  padding: 12px;
-  margin-top: 17px;
-
-  background-color: var(--pale-spring-bud);
+  padding: 15px;  /* Increase padding for a larger button */
+  background-color: #007bff;
+  color: white;
+  font-size: 1.2rem;  /* Increase font size */
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
-  color: black;
-  font-size: 15px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .buttonng:hover {
-  background-color: rgb(205, 206, 135);
+  background-color: #0056b3;
 }
 
-/* Forgot Password Link */
-.forgot-password {
-  text-align: right;
-
-  margin-bottom: 15px;
+button:disabled {
+  background-color: #c4c4c4;
+  cursor: not-allowed;
 }
 
-.forgot-password .link {
+/* Error Messages */
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+/* Invalid Inputs with Error */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #e74c3c;
+}
+
+/* Invalid Inputs Error Styling */
+.ng-invalid.ng-touched + .alert-danger {
+  display: block;
+}
+
+/* Form Button Container */
+.btn-container {
+  margin-top: 20px;
+}
+
+/* Sign In Link */
+.text-center {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.text-center .link {
   color: #007bff;
   text-decoration: none;
 }
 
-.forgot-password .link:hover {
-  color: #0056b3;
+.text-center .link:hover {
   text-decoration: underline;
 }
 
-/* OR Separator */
-.or-separator p {
-  font-size: 15px;
-  color: #666;
-}
-
-/* Styling for the button container */
-.buttong {
-  display: flex;
-  justify-content: center;  /* Center the button horizontally */
-  align-items: center;      /* Center the button vertically if the container has height */
-  margin-top: 20px;         /* Add some space above the button if needed */
-  border: none;             /* Remove any border from the container */
-  background: none;         /* Remove any background from the container */
-}
-
-/* Styling for the button itself */
-.buttong button {
-  padding: 12px;   
-  border: none;    
-  background: none;
-  width: 100%;
-border: none;
-display: block;          /* Remove default border */
-  border-radius: 8px;        /* Add border radius for rounded corners */
-  color: white;              /* Set text color */
-  font-size: 15px;           /* Set font size */
-  cursor: pointer;           /* Change cursor to pointer on hover */
-  transition: background-color 0.3s ease; /* Add transition for background color change */
-}
-
-
-
-.link {
-  color: #007bff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.link:hover {
-  color: #0056b3;
-  text-decoration: underline;
-}
-
-/* Responsive Design */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .container {
-      max-width: 90%;
-      padding: 20px;
+  .main-container {
+    padding: 30px;  /* Adjust padding on mobile for better spacing */
+    width: 90%;
   }
-
+  
   h2 {
-      font-size: 15px;
+    font-size: 2rem;  /* Slightly smaller title on mobile */
   }
 
-  input {
-      padding: 8px;
-      font-size: 15px;
-  }
-
-  button {
-      padding: 10px;
-      font-size: 15px;
-  }
-}
-
-/* Two-Column Layout */
-@media (min-width: 769px) {
   .form-group {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    margin-bottom: 20px;
   }
 
-  .form-group label,
-  .form-group input {
-      width: 100%;
-  }
-
-  .form-group .full-width {
-      width: 100%;
-  }
-
-  /* Error messages should take full width */
-  .alert {
-      width: 100%;
+  .buttonng {
+    font-size: 1rem;  /* Adjust button font size on mobile */
   }
 }
