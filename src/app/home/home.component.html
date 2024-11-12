@@ -6,7 +6,7 @@
 
     <div class="alert">
       <div class="container">
-        <p class="alert-text">TAKE CONTROL OF YOUR STORE LIKE NEVER BEFORE!</p>
+        <p class="alert-text">Take control of your store like never before!</p>
       </div>
     </div>
 
@@ -392,10 +392,11 @@
       class="chatbot-iframe"></iframe>
   </div>
 
-  <!-- Back to Top Button -->
-  <a [routerLink]="['/home']" fragment="home" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+  <a (click)="scrollToTop()" class="back-top-btn" aria-label="back to top" data-back-top-btn>
     <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
   </a>
+  
+  
 
 
   <router-outlet></router-outlet>

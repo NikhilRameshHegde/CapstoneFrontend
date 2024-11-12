@@ -789,13 +789,14 @@ input, button {
     opacity: 0;
     visibility: hidden;
     transition: var(--transition-1);
+    cursor: pointer;
   }
 
   .back-top-btn.active {
     opacity: 1;
     visibility: visible;
     width: 50px;
-
+    height: 50px;
   }
   
   
