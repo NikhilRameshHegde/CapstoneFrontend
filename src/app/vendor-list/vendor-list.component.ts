@@ -71,7 +71,9 @@ export class VendorListComponent implements OnInit {
 
   applyPriceFilter(): void {
     if (this.selectedPriceRange) {
-      const [minPrice, maxPrice] = this.selectedPriceRange.split('-').map(price => parseFloat(price));
+      const [minPrice, maxPrice] = this.selectedPriceRange.split('-').map(price => 
+        price === 'infinity' ? Infinity : parseFloat(price)
+      );      
       this.filteredProducts = this.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
     } else {
       this.filteredProducts = this.products;
@@ -87,7 +89,9 @@ export class VendorListComponent implements OnInit {
     // Filter by price range
     let filteredByPrice = this.products;
     if (this.selectedPriceRange) {
-      const [minPrice, maxPrice] = this.selectedPriceRange.split('-').map(price => parseFloat(price));
+      const [minPrice, maxPrice] = this.selectedPriceRange.split('-').map(price => 
+        price === 'infinity' ? Infinity : parseFloat(price)
+      );      
       filteredByPrice = filteredByPrice.filter(product => product.price >= minPrice && product.price <= maxPrice);
     }
 

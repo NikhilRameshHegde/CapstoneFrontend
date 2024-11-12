@@ -1,7 +1,7 @@
 <header class="header">
   <div class="alert">
     <div class="container">
-      <p class="alert-text">Free Shipping Across India on Orders Above ₹299!</p>
+      <p class="alert-text">Take control of your store like never before!</p>
     </div>
   </div>
 
@@ -14,19 +14,13 @@
       </button>
 
       <div class="input-wrapper">
-        <input 
-          type="search" 
-          name="search" 
-          placeholder="Search product" 
-          class="search-field" 
-          [(ngModel)]="searchQuery" 
-          (input)="onSearch()"
-        >
+        <input type="search" name="search" placeholder="Search product" class="search-field" [(ngModel)]="searchQuery"
+          (input)="onSearch()">
         <button class="search-submit" aria-label="search" (click)="onSearch()">
           <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
         </button>
       </div>
-      
+
 
       <a href="/home" class="logo">
         <img class="logoimage" src="/assets/images/logo.png" width="179" height="26" alt="Glowing">
@@ -36,7 +30,7 @@
         <button class="header-action-btn" aria-label="user" routerLink="/profile">
           <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
         </button>
-        
+
         <button class="header-action-btn" aria-label="cart item">
           <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
         </button>
@@ -63,16 +57,25 @@
       <label for="priceRange" class="filter-label">Filter by Price Range:</label>
       <select id="priceRange" (change)="onPriceRangeChange($event)" class="filter-select">
         <option value="">All</option>
-        <option value="100-200">₹100 - ₹200</option>
-        <option value="300-400">₹300 - ₹400</option>
-        <option value="500-600">₹500 - ₹600</option>
-        <!-- Add more price ranges as needed -->
+        <option value="0-50">₹0 - ₹50</option>
+        <option value="50-100">₹50 - ₹100</option>
+        <option value="100-250">₹100 - ₹250</option>
+        <option value="250-500">₹250 - ₹500</option>
+        <option value="500-1000">₹500 - ₹1000</option>
+        <option value="1000-1500">₹1000 - ₹1500</option>
+        <option value="1500-2000">₹1500 - ₹2000</option>
+        <option value="2000-3000">₹2000 - ₹3000</option>
+        <option value="3000-5000">₹3000 - ₹5000</option>
+        <option value="5000-10000">₹5000 - ₹10000</option>
+        <option value="10000-infinity">₹10000 and above</option>
+
       </select>
     </div>
 
     <!-- Products Section -->
     <div *ngIf="filteredProducts.length; else noProducts" class="products-grid">
-      <div *ngFor="let product of filteredProducts" class="product-card" [routerLink]="['/productsdetails', product.id]">
+      <div *ngFor="let product of filteredProducts" class="product-card"
+        [routerLink]="['/productsdetails', product.id]">
         <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image">
         <div class="product-details">
           <h3 class="product-title">{{ product.name }}</h3>
