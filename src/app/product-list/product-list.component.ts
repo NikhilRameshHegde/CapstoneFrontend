@@ -76,14 +76,22 @@ export class ProductListComponent implements OnInit {
 
   applyPriceFilter(): void {
     if (this.selectedPriceRange) {
-      const [minPrice, maxPrice] = this.selectedPriceRange.split('-').map(price => parseFloat(price));
-      this.filteredProducts = this.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
+      if (this.selectedPriceRange === '100000-infinity') {
+        // Filter products with price greater than or equal to ₹1,00,000 (infinity)
+        this.filteredProducts = this.products.filter(product => product.price >= 100000);
+      } else {
+        // For other ranges, split and filter based on min and max prices
+        const [minPrice, maxPrice] = this.selectedPriceRange.split('-').map(price => parseFloat(price));
+        this.filteredProducts = this.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
+      }
     } else {
+      // If no price range is selected, show all products
       this.filteredProducts = this.products;
     }
     console.log('Filtered Products:', this.filteredProducts); // Log filtered products
     this.cdr.detectChanges(); // Force change detection
-  }
+}
+
   onSearch(): void {
     this.applyFilters();
   }

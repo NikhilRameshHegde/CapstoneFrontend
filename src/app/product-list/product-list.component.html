@@ -62,10 +62,16 @@
       <label for="priceRange" class="filter-label">Filter by Price Range:</label>
       <select id="priceRange" (change)="onPriceRangeChange($event)" class="filter-select">
         <option value="">All</option>
-        <option value="100-200">₹100 - ₹200</option>
-        <option value="300-400">₹300 - ₹400</option>
-        <option value="500-600">₹500 - ₹600</option>
-        <!-- Add more price ranges as needed -->
+        <option value="0-100">₹0 - ₹100</option>
+        <option value="100-250">₹100 - ₹250</option>
+        <option value="250-500">₹250 - ₹500</option>
+        <option value="500-1000">₹500 - ₹1000</option>
+        <option value="1000-5000">₹1000 - ₹5000</option>
+        <option value="5000-10000">₹5000 - ₹10000</option>
+        <option value="10000-25000">₹10000 - ₹25000</option>
+        <option value="25000-50000">₹25000 - ₹50000</option>
+        <option value="50000-100000">₹50000 - ₹100000</option>
+        <option value="100000-infinity">₹1,00,000 and above</option>
       </select>
     </div>
 
