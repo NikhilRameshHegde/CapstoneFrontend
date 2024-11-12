@@ -99,12 +99,13 @@
                 <div class="card-content1">
 
                   <h1 class="h1 hero-title">
-                    Nearby Finds,<br>
-                     Delivered Fast
+                    Your Business, <br>
+                    Simplified and Fast
                   </h1>
                   <p class="hero-text">
-                    Stay on top of your business. View and manage all orders from your store with ease.
-                </p>
+                    Effortlessly track and manage every order, giving you full control over your store from a single place.
+                  </p>
+                  
                 
                   <!-- View Orders Button in Home Section -->
 <a  (click)="viewOrders()" class="btn btn-primary">View Orders</a>
@@ -154,139 +155,46 @@
   </main>
 
 
-  <!-- 
-    - #FOOTER
-  -->
-
-  <footer id="contact" class="footer" data-section>
-    <div class="container">
-
-      <div class="footer-top">
-
-        <ul class="footer-list">
-
+  <footer id="contact" class="footer-section">
+    <div class="footer-container">
+  
+      <div class="footer-top-section">
+  
+        <!-- Company Information -->
+        <ul class="footer-list-company">
           <li>
-            <p class="footer-list-title">Company</p>
+            <p class="footer-title">Company</p>
           </li>
-
-         
-
-          <li>
-            <p class="footer-list-text bold">+91 9353817057</p>
-          </li>
-
-          <li>
-            <p class="footer-list-text">nikhil36908&#64;gmail.com</p>
-          </li>
-
-          <li>
-            <p class="footer-list-text bold">+91 7396393972</p>
-          </li>
-
-          <li>
-            <p class="footer-list-text">pavani336&#64;gmail.com</p>
-          </li>
-
+          <li class="footer-contact-item bold">+91 9353817057</li>
+          <li class="footer-contact-item">nikhil36908&#64;gmail.com</li>
+          <li class="footer-contact-item bold">+91 7396393972</li>
+          <li class="footer-contact-item">pavani336&#64;gmail.com</li>
         </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">Useful links</p>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">New Products</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Best Sellers</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Bundle & Save</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Online Gift Card</a>
-          </li>
-
-        </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">Information</p>
-          </li>
-
-          
-
-          <li>
-            <a href="#" class="footer-link">Terms & Conditions</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Privacy Policy</a>
-          </li>
-
-        </ul>
-
-        <div class="footer-list">
-
-          <p class="newsletter-title">Good emails.</p>
-
-          <p class="newsletter-text">
-            Enter your email below to be the first to know about new collections and product launches.
+  
+        <!-- Quick Support Section -->
+        <div class="footer-quick-support">
+          <p class="footer-title">Quick Support</p>
+          <p class="support-text">
+            Need assistance? Reach out to us directly for any inquiries or support. We're here to help!
           </p>
-
-          <form action="" class="newsletter-form">
-            <input type="email" name="email_address" placeholder="Enter your email address" required
-              class="email-field">
-
-            <button type="submit" class="btn btn-primary">Subscribe</button>
-          </form>
-
+          <a href="mailto:nikhil36908@gmail.com,pavani336@gmail.com" class="support-btn">Contact Support</a>
         </div>
-
+  
       </div>
-
-      <div class="footer-bottom">
-
-        <div class="wrapper">
-          <p class="copyright">
-            &copy; 2024 UrbanBloom
-          </p>
-
-          <ul class="social-list">
-
-         
-            <li>
-              <a href="https://www.facebook.com/profile.php?id=100082222343744" class="social-link" target="_blank">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="https://www.Instagram.com/bokampavani" class="social-link" target="_blank">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </a>
-            </li>
-
-          
-
+  
+      <div class="footer-bottom-section">
+        <div class="footer-bottom-wrapper">
+          <p class="footer-copyright">&copy; 2024 UrbanBloom</p>
+          <ul class="footer-social-list">
+            <li><a href="https://www.facebook.com/profile.php?id=100082222343744" class="footer-social-link" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="https://www.Instagram.com/bokampavani" class="footer-social-link" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a></li>
           </ul>
         </div>
-
-        <a [routerLink]="['/vendor-home']" fragment="home" class="navbar-link has-after">
-        <img src="./assets/images/logo.png" width="179" height="26" loading="lazy" alt="GlowingTest">
-        </a>
-
-        <img src="./assets/images/pay.png" width="313" height="28" alt="available all payment method" class="w-100">
-
       </div>
-
+  
     </div>
   </footer>
+  
 
 
 
