@@ -18,6 +18,7 @@ import { Product } from '../product';
 export class OrderItemComponent implements OnInit {
   orderItems: OrderItem[] = [];
   totalAmount: number = 0;
+  isCartEmpty: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,21 +32,24 @@ export class OrderItemComponent implements OnInit {
     this.loadOrderItems();
   }
 
-  // Sanitize URLs to prevent XSS
   getSafeUrl(url: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
-  // Load order items from local storage and populate additional product details
   loadOrderItems(): void {
     let loadedItems = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (loadedItems.length === 0) {
+      this.isCartEmpty = true;
+      return;
+    }
+
+    this.isCartEmpty = false;
     loadedItems.forEach((item: OrderItem) => {
       this.productService.getProductById(item.productId).subscribe(product => {
         this.orderItems.push({
           ...item,
           productName: product.name,
           price: product.price,
-          // Don't store `productImage` in `OrderItem`, just use it directly in the component
           productImage: product.imageUrl
         });
         this.calculateTotalAmount();
@@ -53,41 +57,48 @@ export class OrderItemComponent implements OnInit {
     });
   }
   
-  // Calculate total amount for the order
   calculateTotalAmount(): void {
     this.totalAmount = this.orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
-  // Increase the quantity of an item in the cart
   increaseQuantity(index: number): void {
     this.orderItems[index].quantity++;
     this.updateCart();
   }
 
-  // Decrease the quantity of an item in the cart
   decreaseQuantity(index: number): void {
     if (this.orderItems[index].quantity > 1) {
       this.orderItems[index].quantity--;
     } else {
       this.orderItems.splice(index, 1);
+      if (this.orderItems.length === 0) {
+        this.isCartEmpty = true;
+      }
     }
     this.updateCart();
   }
 
-  // Update the cart in local storage
   updateCart(): void {
     localStorage.setItem('cart', JSON.stringify(this.orderItems));
     this.calculateTotalAmount();
   }
 
-  // Place the order and send only required data
+  navigateToHome(): void {
+    this.router.navigate(['/home']);
+  }
+
   placeOrder(): void {
+    if (this.isCartEmpty) {
+      alert('Please add items to your cart before placing an order.');
+      return;
+    }
+
     const orderData = {
       userId: localStorage.getItem('userId') || 'defaultUserId',
       orderItems: this.orderItems.map(item => ({
         productId: item.productId,
         quantity: item.quantity,
-        price: item.price // Include the price
+        price: item.price
       }))
     };
   
@@ -96,12 +107,11 @@ export class OrderItemComponent implements OnInit {
         console.log('Order placed successfully');
         alert("Order placed successfully");
         localStorage.removeItem('cart');
-        this.router.navigate(['/home']);  // Adjust according to the desired destination
+        this.router.navigate(['/home']);
       },
       error: err => {
         alert('An error occurred. Please try again.');
       }
     });
   }
-  
 }
