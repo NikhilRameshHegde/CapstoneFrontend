@@ -110,7 +110,7 @@ export class OrderItemComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       error: err => {
-        alert('An error occurred. Please try again.');
+        alert('An error occurred. Out of Stock.');
       }
     });
   }
