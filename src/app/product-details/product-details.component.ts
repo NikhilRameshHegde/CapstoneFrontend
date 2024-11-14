@@ -20,7 +20,7 @@ import { Review } from '../review';
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product | null = null;
-  reviews: any[] = [];
+  reviews: Review[] = [];
   newReview = { username: '', rating: 1, comment: '', reviewDate: new Date() };
   showCartMessage = false;
   cartMessageTimeout: any;
@@ -45,17 +45,27 @@ export class ProductDetailsComponent implements OnInit {
         error: (err) => console.error('Error fetching product details:', err)
       });
 
-      this.productService.getReviewsByProductId(productId).subscribe({
-        next: (reviews) => this.reviews = reviews,
-        error: (err) => console.error('Error fetching reviews:', err)
-      });
       this.newReview.username = localStorage.getItem('username') || '';
     }
   }
 
   loadReviews(productId: string): void {
-    this.productService.getReviewsByProductId(productId).subscribe(reviews => {
-      this.reviews = reviews;
+    this.productService.getReviewsByProductId(productId).subscribe({
+      next: (reviews) => {
+        // Filter out any null or undefined reviews
+        this.reviews = reviews.filter(review => review != null);
+        
+        // Update the product's reviewIds if product exists
+        if (this.product) {
+          this.product.reviewIds = reviews
+            .map(review => review.id || '')
+            .filter(id => id !== '');
+        }
+      },
+      error: (err) => {
+        console.error('Error loading reviews:', err);
+        this.reviews = [];
+      }
     });
   }
 
@@ -137,7 +147,12 @@ export class ProductDetailsComponent implements OnInit {
 
     this.reviewService.createReview(review).subscribe({
       next: (reviewResponse) => {
-        this.reviews.push(reviewResponse);
+        // Add the new review ID to the product's reviewIds array
+        if (this.product && reviewResponse.id) {
+          this.product.reviewIds.push(reviewResponse.id);
+        }
+        // Reload reviews to get the updated list
+        this.loadReviews(this.product!.id);
         this.newReview = { username: '', rating: 1, comment: '', reviewDate: new Date() };
         alert('Review submitted successfully!');
       },
@@ -154,5 +169,11 @@ export class ProductDetailsComponent implements OnInit {
 
   signOut(): void {
     this.userService.signOut();
+  }
+
+  refreshReviews(): void {
+    if (this.product) {
+      this.loadReviews(this.product.id);
+    }
   }
 }

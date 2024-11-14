@@ -190,23 +190,25 @@ export class HomeComponent implements OnInit {
     this.productService.getAllProducts().subscribe(
       (products: Product[]) => {
         products.forEach(product => {
-          this.calculateAverageRating(product.id).then(average => {
-            product.averageRating = average;
-          });
+          this.productService.getReviewsByProductId(product.id).subscribe(
+            (reviews: Review[]) => {
+              // Update reviewIds with the actual review IDs
+              product.reviewIds = reviews.map(review => review.id || '').filter(id => id !== '');
+              product.averageRating = this.calculateAverageRating(reviews);
+            },
+            error => console.error(`Failed to load reviews for product ${product.id}:`, error)
+          );
         });
         this.products = products;
       },
       error => console.error('Failed to load products:', error)
     );
   }
-  
-  async calculateAverageRating(productId: string): Promise<number> {
-    const reviews = await this.productService.getReviewsByProductId(productId).toPromise();
-    if (reviews && reviews.length > 0) {
-      const total = reviews.reduce((sum, review) => sum + review.rating, 0);
-      return total / reviews.length;
-    }
-    return 0;
+
+  calculateAverageRating(reviews: Review[]): number {
+    if (!reviews || reviews.length === 0) return 0;
+    const total = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return total / reviews.length;
   }
   
   signOut(){
