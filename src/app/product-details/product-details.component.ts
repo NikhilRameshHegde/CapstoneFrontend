@@ -20,7 +20,7 @@ import { Review } from '../review';
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product | null = null;
-  reviews: Review[] = [];
+  reviews: any[] = [];
   newReview = { username: '', rating: 1, comment: '', reviewDate: new Date() };
   showCartMessage = false;
   cartMessageTimeout: any;

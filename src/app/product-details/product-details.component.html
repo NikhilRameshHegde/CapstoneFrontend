@@ -55,18 +55,17 @@
   </div>
 
   <div class="product-reviews">
-      <h2>Reviews</h2>
-      <div *ngIf="reviews.length; else noReviews">
-          <div *ngFor="let review of reviews" class="review-item">
-              <p><strong>{{ review.username }}</strong> ({{ review.reviewDate | date:'medium' }})</p>
-              <p>{{ review.comment }}</p>
-              <p>Rating: {{ review.rating }}</p>
-          </div>
-      </div>
-      <ng-template #noReviews>
-          <p>No reviews yet.</p>
-      </ng-template>
-
+    <h2>Reviews</h2>
+    <div *ngIf="reviews.length; else noReviews">
+        <div *ngFor="let review of reviews" class="review-item">
+            <p><strong>{{ review.username }}</strong> ({{ review.reviewDate | date:'medium' }})</p>
+            <p>{{ review.comment }}</p>
+            <p>Rating: {{ review.rating }}</p>
+        </div>
+    </div>
+    <ng-template #noReviews>
+        <p>No reviews yet.</p>
+    </ng-template>
       <form (ngSubmit)="submitReview()" class="action-content review-form">
           <div class="form-row">
               <label for="username" class="form-label">Username:</label>
